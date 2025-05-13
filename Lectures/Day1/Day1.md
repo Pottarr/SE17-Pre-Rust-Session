@@ -4,7 +4,7 @@
 - Basic Syntax
 - Variables and Data Types
 - Operators
-- If/Else statements
+- Control Flow Keywords
 - Loops
 
 # Installing Rust
@@ -108,7 +108,237 @@ cargo doc --open
 
 In Rust, we use print!() and println!() **macros** to show the output on the terminal.
 
-> Important notice: Macros are not functions but we will not dive into it in this 2 days sessions.
+> Important notice: Macros are not Functions but we will not dive into it in this 2 days session.
+
+Now, let's write our first program!
+
+```rs
+fn main() {
+    println!("Hello, World!");
+}
+```
+
+To explain what is going on, we need to know that Rust code will start executing only when it has got the main function somewhere in the code.  
+
+Unlike C and C++, Rust main function can be anywhere in the code. It can above, under, or in the middle of other functions
+
+> We will talk more about function in the following day session.
+
+## Commenting Code
+
+In rust we use double forward slashes **//** to comment code.
+
+For example,  
+
+```rs
+fn main() {
+    println!("Hello, World!");
+    // println!("This won't be printed hehe");
+}
+```
+
+The output should be  
+
+```sh
+Hello, World!
+```
+
+# Variable Types
+
+# Operators
+
+# Control Flow Keywords
+
+# Loops
+
+Rust has 3 types of loops.
+
+## Normal Loop
+The normal will execute the code in ts scope repeatly until i meets the condition and breaks inside the loop itself.  
+
+For example, 
+
+```rs
+fn main() {
+    let mut num: i32 = 10;
+    loop {
+        if num == 0 {
+            println!("Happy New Year!!!");
+        } else {
+            print!("{} ", num);
+            num -= 1;
+        }
+    }
+}
+```
+
+
+<!-- NOTE: Don't forget to mention the compound assignment operators at "num -= 1;" -->
+
+
+
+The output should be  
+
+```sh
+10 9 8 7 6 5 4 3 2 1 Happy New Year!!!
+```
+
+## For Loop
+
+This type of loop will loop through the iterator.
+
+> We will not cover the iterator in this 2 days session but it will be cover after midterm.  
+
+For example,  
+
+```rs
+fn main() {
+    for i in 1..3 {
+        println!("Count is: {}", i);
+    }
+}
+```
+
+The output should be  
+
+```sh
+Count is: 1
+Count is: 2
+```
+
+Wait there is no "Count is: 3"! Yes, the iterator in the for loop is exclusive at the end.  
+
+To make the iterator inclusive we should at "=".  
+
+For example,  
+
+```rs
+fn main() {
+    for i in 1..=3 {
+        println!("Count is: {}", i);
+    }
+}
+```
+
+The output should be  
+
+```sh
+Count is: 1
+Count is: 2
+Count is: 3
+```
+
+Another example which will be helpful in the lab,  
+
+```rs
+fn main() {
+    for i in 1..=5 {
+        for _ in 1..=i {
+            print!("*");
+        }
+        println!();
+    }
+}
+```
+
+The output should be  
+
+```sh
+*
+**
+***
+****
+*****
+```
+
+Another example,  
+
+```rs
+fn main() {
+    for i in (1..=5).rev() {
+        for _ in 1..=i {
+            print!("*");
+        }
+        println!();
+    }
+}
+```
+
+The output should be  
+
+```sh
+*****
+****
+***
+**
+*
+```
+
+As you see, the iterator can be reverse using **.rev()** method.
+
+> Well now, what in the world is METHOD? We will not cover in this 2 days session but it will be taught in the OOP concept, hopefully before midterm or later.  
+
+## While Loop
+
+In Rust we normally declare a mutable variable or more to initialize the while loop.  
+
+For example we can rewrite our old code as like this  
+
+```rs
+fn main() {
+    let mut i: i32 = 1;
+    let mut j: i32 = 1;
+
+    while i <= 5 {
+        while j <= i {
+            print!("*");
+            j += 1;
+        }
+        println!();
+        i += 1;
+        j = 1;
+    }
+}
+```
+
+The output should be  
+
+```sh
+*
+**
+***
+****
+*****
+```
+
+And also vice versa,  
+
+```rs
+fn main() {
+    let mut i: i32 = 5;
+    let mut j: i32 = 1;
+
+    while i >= 1 {
+        while j <= i {
+            print!("*");
+            j += 1;
+        }
+        println!();
+        i -= 1;
+        j = 1;
+    }
+}
+```
+
+The output should be  
+
+```sh
+*****
+****
+***
+**
+*
+```
 
 ---
 Lecturers:  
