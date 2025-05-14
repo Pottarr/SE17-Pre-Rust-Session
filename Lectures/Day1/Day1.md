@@ -29,7 +29,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ### Understanding the command
 Just to let you know, every time you get any bash command from the internet, MAKE SURE you understand the context of it!  
 
-This command is the download command using **curl** with flag **--proto** to check for the link to be **https**, the flag **--tlsv1.2** is to force to use **TLS version 1.2+** and the flag **-sSf** in the end is to **silent when successfully installed and thow error when failed**.
+This command is the download command using `curl` with flag `--proto` to check for the link to be `https`, the flag `--tlsv1.2` is to force to use `TLS version 1.2+` and the flag `-sSf` in the end is to **silent when successfully installed and thow error when failed**.
 
 # Rust Compiler and Cargo
 
@@ -39,31 +39,31 @@ There are 2 ways to compile rust code.
 
 ## rustc (Rust Compiler)
 
-**rustc** is mainly used in small project which has only one rust (.rs) file and does not rely on dependencies.  
+`rustc` is mainly used in small project which has only one rust (.rs) file and does not rely on dependencies.  
 
-To use **rustc**,
+To use `rustc`,
 
 ```sh
 rustc your_program_name.rs -o your executable_file_name
 ```
 
-> If you realize the name of the file, you can see that Rust programming language has its own convention about naming file. It is recommended to use **snake_case** for most of the element of your codes or programs.
+> If you realize the name of the file, you can see that Rust programming language has its own convention about naming file. It is recommended to use `snake_case` for most of the element of your codes or programs.
 
-It is optional to declare the flag **-o** (output name flag). If you do not declare it, the compiler will name the executable file after your program name.  
+It is optional to declare the flag `-o` (output name flag). If you do not declare it, the compiler will name the executable file after your program name.  
 
-> For Windows, you need to have **.exe** after the executable files, while in MacOS and Linux, it is unnecessary. (On Windows, after the **-o** flag, it is unnecessary to enter **.exe** afte the executable file name, since the compiler can figure it out by itself)
+> For Windows, you need to have `.exe` after the executable files, while in MacOS and Linux, it is unnecessary. (On Windows, after the `-o` flag, it is unnecessary to enter `.exe` afte the executable file name, since the compiler can figure it out by itself)
 
 ## cargo (Rust packages manager)
 
-**cargo** is mainly used in real-world project which has hierarchy of files and rely on dependencies. You can add or remove dependencies in the **cargo.toml** file. You can also create a documentation for your Rust project using cargo too.
+`cargo` is mainly used in real-world project which has hierarchy of files and rely on dependencies. You can add or remove dependencies in the `cargo.toml` file. You can also create a documentation for your Rust project using cargo too.
 
-To create a new Rust project using **cargo**,
+To create a new Rust project using `cargo`,
 
 ```sh
 cargo new your_project_name
 ```
 
-> As you can see, cargo prefer **snake_case** to be the naming format of your project name too.
+> As you can see, cargo prefer `snake_case` to be the naming format of your project name too.
 
 **DO NOT FORGET TO ENTER THE DIRECTORY BEFORE PROCEEDING OTHER COMMAND VIA CARGO**
 
@@ -71,24 +71,24 @@ cargo new your_project_name
 cd your_project_name
 ```
 
-To build the project as the execuatble file using **cargo**,
+To build the project as the execuatble file using `cargo`,
 
 ```sh
 cargo build
 ```
 
-To run the project code using **cargo**,
+To run the project code using `cargo`,
 
 ```sh
 cargo run
 ```
 
-To create the project's documentation using **cargo**,
+To create the project's documentation using `cargo`,
 
 ```sh
 cargo doc
 ```
-To open the project's documentation using **cargo**,
+To open the project's documentation using `cargo`,
 
 ```sh
 cargo doc --open
@@ -99,8 +99,8 @@ cargo doc --open
 | Use cases | rustc | cargo |
 | ---------- | ----------- | ---------- |
 | Project Size | One file | Project with hierarchy of files |
-| Dependencies | Does not support | Can manage using **cargo.toml** |
-| Documenting | No built-in for that | Can create it using **cargo doc** |
+| Dependencies | Does not support | Can manage using `cargo.toml` |
+| Documenting | No built-in for that | Can create it using `cargo doc` |
 
 # Basic Syntax
 
@@ -126,7 +126,7 @@ Unlike C and C++, Rust main function can be anywhere in the code. It can above, 
 
 ## Commenting Code
 
-In rust we use double forward slashes **//** to comment code.
+In rust we use double forward slashes `//` to comment code.
 
 For example,  
 
@@ -147,6 +147,145 @@ Hello, World!
 
 # Operators
 
+Like in mathematics, any expression has operators and operands. You will see an example from the next diagram.  
+
+```sh
+                    This is an operator
+                             |
+                             ∨
+                           7 + 2
+                           ∧   ∧
+                           |   |
+                    These are operands
+```
+
+## Operator Types (By counts of operands)
+
+In this 2 days session we will talk about 2 types of operators.
+
+- Unary Operators
+- Binary Operators
+
+### Unary Operators
+
+The unary operators are operators which need only 1 operand.
+
+```rs
+let negative_int = -2; // This is a negative sign operator.
+let wrong = !true; // This is a logical negation operator.
+```
+
+### Binary Operators
+
+The binary operators are operator which need 2 operands. This types of operators are the most commonly found in everyday life.
+
+## Operator Types (By their use cases)
+
+### Arithmetic Operators
+
+In Rust, arithmetic operators are used to do the arithmetic calculation as like in normal mathematics.
+
+```rs
+fn main() {
+    let negative = -5;
+    let addition = 3 + 1;
+    let subtraction = 1 - 3;
+    let multiplication = 4 * 2;
+    let division = 5 / 2;
+    let modulo = 14 % 3;
+    println!("Negative: {}", negative);
+    println!("Addition: {}", addition);
+    println!("Subtraction: {}", subtraction);
+    println!("Multiplication: {}", multiplication);
+    println!("Division: {}", division);
+    println!("Modulo: {}", modulo);
+}
+```
+
+The output should be  
+
+```sh
+Negative: -5
+Addition: 4
+Subtraction: -2
+Multiplication: 8
+Division: 2
+Modulo: 2
+```
+
+> If you look carefully at the Division, you will see that the result has no decimal points. That is because the compiler assumes that the number being operated are 32-bit integer (i32).
+
+### Comparison Operators
+
+In Rust, comparison operators are used to compare values or expressions, and they return a boolean value (true or false).  
+
+| Operator | Name                     | Description                                                             |
+| -------- | ------------------------ | ----------------------------------------------------------------------- |
+| `==`     | Equality                 | Returns `true` if both values are equal.                                |
+| `!=`     | Inequality               | Returns `true` if the values are not equal.                             |
+| `<`      | Less than                | Returns `true` if the left value is less than the right.                |
+| `<=`     | Less than or equal to    | Returns `true` if the left value is less than or equal to the right.    |
+| `>`      | Greater than             | Returns `true` if the left value is greater than the right.             |
+| `>=`     | Greater than or equal to | Returns `true` if the left value is greater than or equal to the right. |
+
+```rs
+fn main() {
+    let a = 5;
+    let b = 10;
+
+    println!("a == b: {}", a == b);
+    println!("a != b: {}", a != b);
+    println!("a < b: {}", a < b);
+    println!("a <= b: {}", a <= b);
+    println!("a > b: {}", a > b);
+    println!("a >= b: {}", a >= b);
+}
+```
+
+The output should be  
+
+```sh
+a == b: false
+a != b: true
+a < b: true
+a <= b: true
+a > b: false
+a >= b: false
+```
+
+### Logical Operators
+
+In Rust, logical operators are used to combine or invert boolean expressions. They're most commonly used in `if` statements and similar control flow constructs.
+
+| Operator | Name | Description |
+| ------- | ------- | ------- |
+| `&&`     | Logical AND | Returns `true` only if **both** expressions are `true`. |
+| `\|\|` | Logical OR | Returns `true` if **at least one** expression is `true`. |
+| `!` | Logical NOT | Inverts the value: `true` becomes `false` and vice versa. |
+
+```rs
+fn main() {
+    let a = true;
+    let b = false;
+
+    println!("a && b = {}", a && b);
+    println!("a || b = {}", a || b);
+    println!("!a = {}", !a);
+}
+```
+
+The output should be  
+
+```sh
+a && b = false
+a || b = true
+!a = false
+```
+
+### Compound Assignment Operators
+
+### Parentheses
+
 # Control Flow Keywords
 
 # Loops
@@ -164,6 +303,7 @@ fn main() {
     loop {
         if num == 0 {
             println!("Happy New Year!!!");
+            break;
         } else {
             print!("{} ", num);
             num -= 1;
@@ -171,11 +311,6 @@ fn main() {
     }
 }
 ```
-
-
-<!-- NOTE: Don't forget to mention the compound assignment operators at "num -= 1;" -->
-
-
 
 The output should be  
 
@@ -206,9 +341,9 @@ Count is: 1
 Count is: 2
 ```
 
-Wait there is no "Count is: 3"! Yes, the iterator in the for loop is exclusive at the end.  
+Wait there is no "Count is: 3"! Yes, the iterator in the for loop is exclusive at the ending boundary.  
 
-To make the iterator inclusive we should at "=".  
+To make the iterator inclusive we should at `=`.  
 
 For example,  
 
@@ -274,7 +409,7 @@ The output should be
 *
 ```
 
-As you see, the iterator can be reverse using **.rev()** method.
+As you see, the iterator can be reverse using `.rev()` method.
 
 > Well now, what in the world is METHOD? We will not cover in this 2 days session but it will be taught in the OOP concept, hopefully before midterm or later.  
 

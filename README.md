@@ -1,9 +1,7 @@
 # SE17 Pre Rust Session
 
-> This course is made to be an introduction to the Rust Programming
-> Language and the guideline of the Elementary System Programming Class
-> in Year 1 of Software Engineering Major, KMITL.
-
+> [!Note]
+> This course is made to be an introduction to the Rust Programming Language and the guideline of the Elementary System Programming Class in Year 1 of Software Engineering Major, KMITL.  
 
 ## Topics
 
