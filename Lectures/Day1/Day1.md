@@ -5,6 +5,7 @@
 - Variables and Data Types
 - Operators
 - Control Flow Keywords
+# bindsym XF86MonBrghtnessUp
 - Loops
 
 # Installing Rust
@@ -12,6 +13,7 @@
 ## For Windows
 [Follow this link](https://www.rust-lang.org/tools/install) and download from the 64-bit version of the installer.
 
+> [!NOTE]
 > May need to install Visual Studio
 
 After downloading the **rustup-init.exe** from the link above, open the executable (.exe) file, enter 1 into the terminal and submit. This process will download the automnatically install rust via Visual Studio and finish the installation. 
@@ -24,6 +26,7 @@ After downloading the **rustup-init.exe** from the link above, open the executab
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
+> [!IMPORTANT]
 > Prerequisite: Need curl installed, you may ask TA for help.
 
 ### Understanding the command
@@ -47,10 +50,12 @@ To use `rustc`,
 rustc your_program_name.rs -o your executable_file_name
 ```
 
+> [!TIP]
 > If you realize the name of the file, you can see that Rust programming language has its own convention about naming file. It is recommended to use `snake_case` for most of the element of your codes or programs.
 
 It is optional to declare the flag `-o` (output name flag). If you do not declare it, the compiler will name the executable file after your program name.  
 
+> [!IMPORTANT]
 > For Windows, you need to have `.exe` after the executable files, while in MacOS and Linux, it is unnecessary. (On Windows, after the `-o` flag, it is unnecessary to enter `.exe` afte the executable file name, since the compiler can figure it out by itself)
 
 ## cargo (Rust packages manager)
@@ -108,7 +113,8 @@ cargo doc --open
 
 In Rust, we use print!() and println!() **macros** to show the output on the terminal.
 
-> Important notice: Macros are not Functions but we will not dive into it in this 2 days session.
+> [!IMPORTANT]
+> Macros are not Functions but we will not dive into it in this 2 days session.
 
 Now, let's write our first program!
 
@@ -213,6 +219,7 @@ Division: 2
 Modulo: 2
 ```
 
+> [!IMPORTANT]
 > If you look carefully at the Division, you will see that the result has no decimal points. That is because the compiler assumes that the number being operated are 32-bit integer (i32).
 
 ### Comparison Operators
@@ -284,9 +291,77 @@ a || b = true
 
 ### Compound Assignment Operators
 
+In most programming languages, we have compound assignment operators to shorten the expressions.  
+
+| Operator | Description | Equivalent To |
+| -------- | -------- | -------- |
+| `+=` | Addition assignment | `a = a + b` |
+| `-=` | Subtraction assignment | `a = a - b`   |
+| `*=` | Multiplication assignment | `a = a * b` |
+| `/=` | Division assignment | `a = a / b` |
+| `%=` | Remainder assignment | `a = a % b` |
+
+For example,  
+
+```rs
+fn main() {
+    let mut num i32 = 11;
+    println!("The value of the number is {}", num);
+    num += 2;
+    println!("The value of the number is {}", num);
+    num -= 3;
+    println!("The value of the number is {}", num);
+    num *= 4;
+    println!("The value of the number is {}", num);
+    num /= 5;
+    println!("The value of the number is {}", num);
+    num %= 6;
+    println!("The value of the number is {}", num);
+}
+```
+
 ### Parentheses
 
 # Control Flow Keywords
+
+## If/else Statements
+
+```rs
+fn main() {
+    if 1 + 1 == 2 {
+        println!("1 + 1 = 2 is true");
+    } else {
+        println!("1 + 1 = 2 is false");
+    }
+}
+```
+
+The output should be  
+
+```sh
+1 + 1 = 2 is true
+```
+
+## Match Keyword
+
+```rs
+fn main() {
+    let key_pressed = 'a';
+    match key_pressed {
+        'w' => println!("Move Forward"),
+        'a' => println!("Move Left"),
+        's' => println!("Move Backward"),
+        'd' => println!("Move Right"),
+        _ => println!("Invalid Input"),
+    }
+}
+```
+
+The output should be  
+
+```sh
+Move Left
+```
 
 # Loops
 
@@ -322,6 +397,7 @@ The output should be
 
 This type of loop will loop through the iterator.
 
+> [!NOTE]
 > We will not cover the iterator in this 2 days session but it will be cover after midterm.  
 
 For example,  
@@ -411,6 +487,7 @@ The output should be
 
 As you see, the iterator can be reverse using `.rev()` method.
 
+> [!NOTE]
 > Well now, what in the world is METHOD? We will not cover in this 2 days session but it will be taught in the OOP concept, hopefully before midterm or later.  
 
 ## While Loop

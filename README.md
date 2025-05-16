@@ -5,13 +5,12 @@
 
 ## Topics
 
-### Day 1
-- Rust compiler
-- Cargo
+### Day 1- Installing Rust
+- Rust Compiler and Cargo
 - Basic Syntax
 - Variables and Data Types
 - Operators
-- If/Else statements
+- Control Flow Keywords
 - Loops
 
 ### Day 2
