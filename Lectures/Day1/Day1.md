@@ -1,12 +1,41 @@
 # Topics
 - Installing Rust
+  - Windows
+  - MacOS and Linux
 - Rust Compiler and Cargo
+  - rustc (Rust compiler)
+  - cargo (Rust packages manager)
+  - rustc VS cargo
 - Basic Syntax
+  - print! and println!
+  - Commenting Code
 - Variables and Data Types
+  - let Keyword
+  - mut Keyword
+  - Shadowing
+  - Simple Data Types
+    - Integers
+    - Floating-point Numbers
+    - Boolean
+    - Char
 - Operators
+  - Operator Types (By number of operands)
+    - Unary Operators
+    - Binary Operators
+  - Operator Types (By their use cases)
+    - Arithmetic Operators
+    - Comparison Operators
+    - Logical Operators
+    - Compound Assignment Operators
+    - Parentheses
 - Control Flow Keywords
-# bindsym XF86MonBrghtnessUp
+  - if/else statements
+  - Nested if statements
+  - match statements
 - Loops
+  - Normal Loop
+  - For Loop
+  - While Loop
 
 # Installing Rust
 
@@ -165,7 +194,7 @@ Like in mathematics, any expression has operators and operands. You will see an 
                     These are operands
 ```
 
-## Operator Types (By counts of operands)
+## Operator Types (By number of operands)
 
 In this 2 days session we will talk about 2 types of operators.
 
@@ -305,7 +334,7 @@ For example,
 
 ```rs
 fn main() {
-    let mut num i32 = 11;
+    let mut num: i32 = 11;
     println!("The value of the number is {}", num);
     num += 2;
     println!("The value of the number is {}", num);
@@ -318,6 +347,16 @@ fn main() {
     num %= 6;
     println!("The value of the number is {}", num);
 }
+```
+The output should be  
+
+```sh
+The value of the number is 11
+The value of the number is 13
+The value of the number is 10
+The value of the number is 40
+The value of the number is 8
+The value of the number is 2
 ```
 
 ### Parentheses

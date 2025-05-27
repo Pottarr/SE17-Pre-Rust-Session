@@ -1,8 +1,42 @@
 # Topics
+- Shadowing
+- Basic Ownership
 - Function
-- Shadowig Scope
-- Basic Ownership (&str VS String)
-- Sequence Data Types (Array Vector)
-- Tuple (Maybe...)
-- Struct (Maybe...)
-- Enum (Maybe...)
+- Complex Data Types
+  - Sequence Data Types
+    - Array
+    -Vector
+  - Tuple (Maybe...)
+  - Enum (Maybe...)
+  - Struct (Maybe...)
+  - Impl (Maybe...)
+
+# Shadowing
+
+# Ownership
+
+## &str VS String
+
+# Function
+
+## Arguments VS Parameters
+
+## Return Value
+
+## Recursive Function
+
+# Sequence Data Types
+
+## Array
+
+## Vector
+
+# Tuple
+
+# Struct (Basic)
+
+# Enum
+
+## Option Enum
+
+## Result Enum
