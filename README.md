@@ -6,6 +6,7 @@
 ## Topics
 
 ### Day 1- Installing Rust
+- Installing Rust
 - Rust Compiler and Cargo
 - Basic Syntax
 - Variables and Data Types
@@ -22,11 +23,11 @@
 - Struct (Maybe...)
 - Enum (Maybe...)
 
-## Lecture
+## Lectures
 [Day 1 Lecture](Lectures/Day1/Day1.md)  
-[Day 2 Lecture](Lectures/Day2/Day2.md)
+[Day 2 Lecture](Lectures/Day2/Day2.md)  
 
-## Lab
+## Labs
 [Day 1 Lab]()  
 [Day 2 Lab]()  
 
