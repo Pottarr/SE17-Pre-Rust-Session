@@ -29,7 +29,7 @@
     - Compound Assignment Operators
     - Parentheses
 - Control Flow Keywords
-  - if/else statements
+  - if-else statements
   - Nested if statements
   - match statements
 - Loops
@@ -605,25 +605,134 @@ The output should be
 
 # Control Flow Keywords
 
-## If/else Statements
+## if-else Statements
+
+### if Keyword
+
+As previously mentioned in the Scalar Data Types Section, Boolean values are
+used in if-else brackets. So in this section, we will be talking about
+control flow statements (AKA. if else statements)  
+
+An `if` expression allows you to execute some code depending on the conditions
+given. The codes in the if block will execute if the given conditions are all
+true. Otherwise it will skip the codes in the if block.  
+
+For example:  
 
 ```rs
-fn main() {
-    if 1 + 1 == 2 {
-        println!("1 + 1 = 2 is true");
-    } else {
-        println!("1 + 1 = 2 is false");
-    }
+let x: i32 = 5;
+
+if x < 10 {
+    println!("{} is less than 10!", x);
 }
 ```
 
 The output should be  
 
 ```
-1 + 1 = 2 is true
+5 is less than 10!
 ```
 
+### else Keyword
+
+But if we change x to, for example, 12, the above code will not print anything
+since the condition is false. To handle the remaining condition cases, we add
+an `else` bracket to out code.  
+
+```rs
+let x: i32 = 12;
+
+if x < 10 {
+    println!("{} is less than 10!", x);
+}
+else {
+    println!("{} is more than or equal to 10!", x);
+}
+```
+
+The output should be  
+
+```
+12 is more than or equal to 10!
+```
+
+### else if Keyword
+
+To handle more than 2 conditions, we can use an `else if` block to handle other
+possible conditions.  
+
+If we change x to 10 and add another condition check:  
+
+```rs
+let x: i32 = 10;
+
+if x < 10 {
+    println!("{} is less than 10!", x);
+}
+else if x == 10 {
+    println!("{} is equal to 10!", x);
+}
+else {
+    println!("{} is more than 10!", x);
+}
+```
+
+The output should be  
+
+```
+10 is equal to 10!
+```
+
+> [!TIP]
+> If we use a boolean variable in a if else condition, we can omit the `==`
+> comparision operator entirely.  
+
+```rs
+let true_var: bool = true;
+
+if true_var
+{
+    println!("true");
+}
+```
+
+The output should be  
+
+```
+true
+```
+
+### if-else in Variables Assignment
+
+Another cool thing about if else statements is that it can also be used to
+assign a value to a variable!  
+
+For example:
+
+```rs
+let condition: bool = true;
+let num: i32 = if condition { 5 } else { 6 };
+
+println!("The number is {}", num);
+```
+
+The output should be  
+
+```
+The number is 5
+```
+
+Here we use if else to assign the value to the variable `num`, the `num`
+variable will contain the number 5 since the condition is true.
+
 ## Match Keyword
+
+The last control flow keyword we are going to talk in this session is
+the `match` keyword.  
+
+The `match` keyword is used for **pattern matching**, which allows you to
+compare a value against a series of patterns and execute code based on
+which pattern matches.  
 
 ```rs
 fn main() {

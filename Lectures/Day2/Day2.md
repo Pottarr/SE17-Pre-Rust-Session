@@ -1,21 +1,19 @@
 # Topics
-- Shadowing
 - Basic Ownership
 - Function
+  - Arguments VS Parameters
+  - Return Value
+  - Recursive Function
 - Complex Data Types
   - Sequence Data Types
     - Array
-    -Vector
-  - Tuple (Maybe...)
-  - Enum (Maybe...)
-  - Struct (Maybe...)
-  - Impl (Maybe...)
-
-# Shadowing
+    - Vector
+  - &str VS String
+  - Tuple
+  - Enum
+  - Struct
 
 # Ownership
-
-## &str VS String
 
 # Function
 
@@ -31,12 +29,14 @@
 
 ## Vector
 
-# Tuple
+## &str VS String
 
-# Struct (Basic)
+## Tuple
 
-# Enum
+## Struct (Basic)
 
-## Option Enum
+## Enum
 
-## Result Enum
+### Option Enum
+
+### Result Enum
