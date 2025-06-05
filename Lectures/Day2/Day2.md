@@ -11,11 +11,21 @@
 - Complex Data Types
     - Sequence Data Types
         - Array
+            - Declaration
+            - Accessing Element
+            - Multidimensional Array
+            - Array Iteration
+                - Iteration by Element
+                - Iteration by Index
         - Vector
     - &str VS String
     - Tuple
-    - Enum
     - Struct
+    - Enum
+        - Declaration
+        - Standard Library Enum
+            - Option
+            - Result
 
 # Ownership
 
@@ -502,9 +512,296 @@ The value of x is: 1
 
 ## Sequence Data Types
 
+In this topic, we'll talk about some more Data Types, mainly
+Sequencing Data Types.  
+
 ### Array
 
+An array is a collection of data of the same type. Arrays are fixed
+size, meaning new data cannot be inserted or old data can't be removed,
+but you can change the value of the existing datas.  
+
+#### Declaration
+
+To create an array, we can create them inside a set of square brackets
+`[]`, and to specify the type for variables, we can do it in the format
+of `[T; N]` where `T` is the `type` and `N` is the `size` of our array.  
+
+For example:  
+
+```rs
+let arr: [i32; 5] = [1, 2, 3, 4, 5];
+```
+
+Here we create an array of i32 with the array size of 5. Inside the
+array we have the data 1, 2, 3, 4, 5.  
+
+To create an array with the same data, we can use the `[T; N]` format.
+
+```rs
+let arr: [i32; 5] = [0; 5];
+```
+
+Here we create an array of zeroes, so now the array will have 5 zeroes
+in it `[0, 0, 0, 0, 0]`.  
+
+#### Accessing Element
+
+To access array elements, we type in the name of our array followed by
+a square bracket with an index number.  
+Rust indexing starts at **0**. So if we want to access the first element,
+we can do that with `arr[0]`.  
+
+For example:  
+
+```rs
+let arr: [i32; 5] = [1, 2, 3, 4, 5];
+
+println!("First element is {}", arr[0]);
+println!("Second element is {}", arr[1]);
+println!("Third element is {}", arr[2]);
+```
+
+The output should be  
+
+```
+First element is 1
+Second element is 2
+Third element is 3
+```
+
+To get the length of an array, we can use the `.len()` method.
+
+> [!NOTE]
+> We won't cover this in this session but you will learn about `.len()`
+> method more in Struct implementation (`impl`) hopefully before
+> midterm.  
+
+```rs
+let arr: [i32; 5] = [1, 2, 3, 4, 5];
+
+println!("The length of this array is {}", arr.len());
+```
+
+The output should be  
+
+```
+The length of this array is 5
+```
+
+#### Multidimensional Array
+
+We can also fit an array inside an array to make a 
+`Multidimensional Array`.  
+
+```rs
+let arr: [[i32; 3]; 2] = [
+    [1, 2, 3],
+    [3, 2, 1]
+];
+```
+
+Here we create an array with a size of 2. Inside we have an array with
+a size of 3.  
+
+To access the innermost element, we can use the double indexing like
+`arr[0][0]`.
+
+```rs
+let arr: [[i32; 3]; 2] = [
+    [1, 2, 3],
+    [3, 2, 1]
+];
+
+println!("The first element of the first array is {}", arr[0][0]);
+```
+
+The output should be  
+
+```
+The first element of the first array is 1
+```
+
+#### Array Iteration
+
+##### Iteration by Element
+
+To iterate through each element inside an array, we can use loops.  
+
+```rs
+let arr: [i32; 5] = [1, 2, 3, 4, 5];
+
+for element in &arr {
+    println!("{}", element);
+}
+```
+
+Here we print each element inside an array line by line.  
+The variable `element` that we used in the for loop can actually be
+named anything you like.  
+
+##### Iteration by Index
+
+Or we can use the more traditional way of accessing by indices.  
+
+```rs
+let arr: [i32; 5] = [1, 2, 3, 4, 5];
+
+for i in 0..arr.len() {
+    println!("{}", arr[i]);
+}
+```
+
+Both outputs should be  
+
+```
+1
+2
+3
+```
+
 ### Vector
+
+Vectors are similar to arrays, except that they are resizeable.
+
+#### Declaration
+
+To create a vector, we can use the `Vec::new()` constructor method, or
+call the `vec!` macro.  
+To specify the type for variables, we use `Vec<T>` where
+`T` is the type.  
+
+> [!NOTE]
+> The `T` in the `Vec<T>` is a way we use `Gerneric` in Rust. We call
+> it `Gerneric Type Parameter` You will learn about this after
+> midterm.  
+
+For example:
+
+```rs
+let vec1: Vec<i32> = vec![1, 2, 3];     // method 1
+let vec2: Vec<i32> = Vec::new();        // method 2
+```
+
+The difference between `vec!` and `Vec::new()` is that you can
+initialize the vector with some items with `vec!` but not with
+`Vec::new()`.  
+`Vec::new()` will only create an empty vector, then you
+can push in items later.
+
+To push in new elements, we use the `.push()` method. **Don't forget
+to make the variable mutable.**  
+
+```rs
+let mut vec1: Vec<i32> = Vec::new();
+vec1.push(5);
+vec1.push(6);
+vec1.push(7);
+```
+
+`vec1` will now contain 5, 6, 7.
+
+To remove the last element, we can use `.pop()` method.  
+`.pop()` also returns the popped element inside an option:  
+
+```rs
+Some(x)
+None
+```
+
+So we can use `.unwrap()` to access that element.
+
+> [!NOTE]
+> `.unwrap()` is a method to simply access the value inside the
+> `Option Enum`. We will talk about it later in the Enum topic later
+> in today session.  
+
+```rs
+let mut vec: Vec<i32> = vec![5, 6, 7, 8];
+let popped_num: i32 = vec.pop().unwrap();
+
+println!("The popped num is: {}", popped_num);
+```
+
+The output should be  
+
+```
+The popped num is: 8
+```
+
+To access vector elements, we can use traditional indexing like
+arrays, or we can use the `.get()` method for vectors.
+
+    let vec1: Vec<i32> = vec![1, 2, 3];
+
+    println!("{}", vec1[0]);
+    println!("{}", vec1.get(0));
+
+Both these results print out 1.
+But using `.get()` will be safer, since if you use the traditional
+indexing, you might index an element that doesn't exist, causing an
+error.  
+
+With `.get()`, the program will return these two options:  
+
+```rs
+Some(x)
+None
+```
+
+Where `x` is the element that you are indexing.
+If the element doesn't exist, the method will return `None`.  
+If you get `Some(x)`, you can use a method like `.unwrap()` to get
+the actual element.  
+
+Like arrays, you can use `.len()` to get the length of a vector  
+
+```rs
+let vec: Vec<i32> = vec![1, 2, 3, 4, 5];
+
+println!("The length of this vector is {}", vec.len());
+```
+
+The output should be  
+
+```
+The length of this vector is 5
+```
+
+We can also do `Multidimensional Vectors` same as arrays.
+
+```rs
+let mut vec: Vec<Vec<i32>> = vec![
+    [1, 2, 3],
+    [3, 2, 1]
+];
+
+println!("{}", vec.get(0).get(0));
+```
+
+The output should be  
+
+```
+1
+```
+
+
+To iterate through each elements, we can use loops.
+
+```rs
+let vec: Vec<i32> = vec![1, 2, 3];
+
+for element in &vec {
+    println!("{}", element);
+}
+```
+
+The output should be  
+```
+1
+2
+3
+```
 
 ## &str VS String
 
