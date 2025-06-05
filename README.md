@@ -5,23 +5,19 @@
 
 ## Topics
 
-### Day 1- Installing Rust
+### Day 1
 - Installing Rust
 - Rust Compiler and Cargo
 - Basic Syntax
-- Variables and Data Types
+- Variables and Scalar Data Types
 - Operators
 - Control Flow Keywords
 - Loops
 
 ### Day 2
+- Ownership
 - Function
-- Shadowig Scope
-- Basic Ownership (&str VS String)
-- Sequence Data Types (Array Vector)
-- Tuple (Maybe...)
-- Struct (Maybe...)
-- Enum (Maybe...)
+- Complex Data Types
 
 ## Lectures
 [Day 1 Lecture](Lectures/Day1/Day1.md)  

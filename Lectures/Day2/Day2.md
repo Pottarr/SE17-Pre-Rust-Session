@@ -1,39 +1,516 @@
 # Topics
 - Basic Ownership
+    - Rules of Ownership
+    - Reference
+    -Mutable Reference VS Immutable Reference
+    - Dangling Reference
 - Function
-  - Arguments VS Parameters
-  - Return Value
-  - Recursive Function
+    - Arguments VS Parameters
+    - Return Value
+    - Recursive Function
 - Complex Data Types
-  - Sequence Data Types
-    - Array
-    - Vector
-  - &str VS String
-  - Tuple
-  - Enum
-  - Struct
+    - Sequence Data Types
+        - Array
+        - Vector
+    - &str VS String
+    - Tuple
+    - Enum
+    - Struct
 
 # Ownership
 
+One of Rust's most unique features is "Ownership". It enables Rust to
+have memory safety without needing a garbage collector.  
+
+Ownership in Rust is a set of rules that the program has to follow in
+order to manage memory.  
+
+## Rules of Ownership
+
+There are 3 rules in Rust's Ownership.
+
+1. Each value in Rust has an owner.
+2. There can only be 1 owner at a time.
+3. When the owner goes out of scope, the value will be dropped.
+
+First, let's look at what scope is:  
+
+```rs
+fn main() {
+
+    {
+        let x = 5; // First we delare variable 'x' inside a scope.
+        // Then we can use 'x' inside this scope.
+    }
+
+    // After the above scope, we can no longer use 'x' since it's already out of scope.
+}
+```
+
+A scope is the range within the program in which the item is valid.  
+For this example we declare the variable `x` inside a scope.
+The variable can be used inside the scope but not after the scope is
+done, since the variable is considered **out of scope**  
+
+If we declare a variable before declaring a scope, we can also use
+that variable inside the scope too.
+
+```rs
+fn main() {
+    let x = 5; // We declare variable 'x'.
+
+    {
+        let y = 6; // We declare variable 'y'.
+
+        // In this scope, both 'x' and 'y' can be used.
+    }
+
+    // After exiting the scope, only 'x' can be used.
+}
+```
+
+Now let's look at moving datas.  
+Take this example:  
+
+```rs
+let x = 5;
+let y = x;
+```
+
+From this example, we can guess that we declare variable `x` with
+value 5, then we declare variable `y` with the value of `x`, so that
+means the value from `x` is copied to `y`. And we'd be right becuase
+that's what's actually happening.  
+
+Now take another example:
+
+```rs
+let s1 = String::from("hello");
+let s2 = s1;
+```
+
+You would think that it's the same thing as the previous example, but
+it's actually not. That's because the String type is not a simple data
+type like i32, so it doesn't automatically copy the value. What it does
+is copy the pointer to the value "hello" in memory, now we have
+2 pointers pointing to the same value.  
+Rust doesn't allow this because if both `s1` and `s2` goes out of
+scope, it will try to free up the same memory, which will create
+problems.  
+So that's why after the line `let s2 = s1;`, Rust considered `s1` not
+valid anymore and the value is moved to 's2' instead.  
+
+> [!NOTE]
+> We will talk about String later on in today session but here is the
+> most understandable example.
+
+If we try this:  
+
+```rs
+let s1 = String::from("hello");
+let s2 = s1;
+
+println!("{}, world!", s1);
+```
+
+We will get an error since `s1` is no longer valid.  
+
+If we want to actually copy the value to `s2` we can call the
+`.clone()` function.  
+
+```rs
+let s1 = String::from("hello");
+let s2 = s1.clone();
+
+println!("s1 = {}, s2 = {}", s1, s2);
+```
+
+Here are more examples I take from the official website for more
+understanding.
+
+```rs
+fn main() {
+    let s = String::from("hello");  // s comes into scope
+
+    takes_ownership(s);             // s's value moves into the function...
+                                    // ... and so is no longer valid here
+
+    let x = 5;                      // x comes into scope
+
+    makes_copy(x);                  // because i32 implements the Copy trait,
+                                    // x does NOT move into the function,
+    println!("{}", x);              // so it's okay to use x afterward
+
+} // Here, x goes out of scope, then s. But because s's value was moved, nothing
+    // special happens.
+
+fn takes_ownership(some_string: String) { // some_string comes into scope
+    println!("{some_string}");
+} // Here, some_string goes out of scope and `drop` is called. The backing
+    // memory is freed.
+
+fn makes_copy(some_integer: i32) { // some_integer comes into scope
+    println!("{some_integer}");
+} // Here, some_integer goes out of scope. Nothing special happens.
+```
+
+But what if we want to write a function that doesn't want to take
+ownership?  
+
+> [!NOTE]
+> Here's how we really use tuples in Rust. We will talk about tuple
+> again later in today session.  
+
+Take this example:  
+
+```rs
+fn main() {
+    let s1 = String::from("hello");
+
+    let (s2, len) = calculate_length(s1);
+
+    println!("The length of '{s2}' is {len}.");
+}
+
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len();
+
+    (s, length)
+}
+```
+
+## Reference
+
+The code above earlier is an example on how you can still use a String
+after a function, but this looks like a lot of work, imagine if we
+have many Strings we have to deal with.  
+This is where our next concept comes in. Instead of moving the value
+into a function, we can `reference` them to not lose ownership.
+A reference is like a pointer to a value.  
+
+Here's a modified code:  
+
+```rs
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{s1}' is {len}.");
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+
+### Mutable Reference VS Immutable Reference
+
+Using the `&`, we can refer to the value but not own it. So we can
+still use `s1` after the function call. But what if we want to make
+changes to our variable in a function?  
+
+We can use what's called a `mutable reference` in our function.  
+
+Here's an example:  
+
+```rs
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+Here we specify in the function parameter to be `&mut String` meaning
+we can modify the value of `some_string` and the value of `s` will also
+be changed.  
+There are some restrictions to this, that is if you already have
+a mutable reference of some value, you cannot have another mutable
+reference of that same value. That means **there can only be 1 mutable
+reference at a time**.  
+
+For example:  
+
+```rs
+let mut s = String::from("hello");
+
+let r1 = &mut s;
+let r2 = &mut s;
+
+println!("{}, {}", r1, r2);
+```
+
+This code above will generate an error, since we have 2 mutable
+reference to the same variable, which is not allowed in Rust.  
+
+But you can generate many immutable reference to the same variable.  
+
+```rs
+let mut s = String::from("hello");
+
+let r1 = &s;
+let r2 = &s;
+
+println!("{}, {}", r1, r2);
+```
+
+This code is valid.  
+
+Here are more examples to give more understanding.  
+
+```rs
+let mut s = String::from("hello");
+
+let r1 = &s; // no problem
+let r2 = &s; // no problem
+let r3 = &mut s; // BIG PROBLEM
+
+println!("{}, {}, and {}", r1, r2, r3);
+```
+
+We can't have a mutable reference while we have an immutable
+reference.  
+
+We can fix this by using the variable.  
+
+```rs
+let mut s = String::from("hello");
+
+let r1 = &s; // no problem
+let r2 = &s; // no problem
+println!("{r1} and {r2}");
+// Variables r1 and r2 will not be used after this point.
+
+let r3 = &mut s; // no problem
+println!("{r3}");
+```
+
+Here we use `r1` and `r2` in a function. The reference scope only
+lasted until the last time it is used, and since we used it in
+a function, the reference scope only lasted up to that function, and
+then we can create a mutable reference without any problem.  
+
+This one below is similar to the last example, the reference goes out
+of scope, so we can create a new one.  
+
+```rs
+let mut s = String::from("hello");
+
+{
+    let r1 = &mut s;
+} // r1 goes out of scope here, so we can make a new reference with no problems.
+
+let r2 = &mut s;
+```
+
+
+With reference like these, you can accidentally create what's called
+a `dangling reference`, which is basically a reference of nothing.  
+
+For example:  
+
+```rs
+fn main() {
+    let reference_to_nothing = dangle();
+}
+
+fn dangle() -> &String {
+    let s = String::from("hello");
+
+    &s
+}
+```
+
+## Dangling Reference
+
+Here we have a function that returns a reference to a String.
+We create a String variable, and return a reference of the variable we
+just created.  
+Now when this function ends, the variable `s` will be dropped since
+it's out of scope, which means the referece we returned is literally
+pointing to nothing.  
+
+So to fix this, we simply return the String instead.  
+
+```rs
+fn no_dangle() -> String {
+    let s = String::from("hello");
+
+    s
+}
+```
+
 # Function
+
+In this section, we will be talking functions!  
+Functions are an important part in programming as it makes your code 
+more reuseable and have a cleaner look.  
+
+In Rust, you write the main codes in the `main()` function.
+
+For example, this below code writes a new function called
+`another_function()` and the `main()` function calls that function.
+
+```rs
+fn main() {
+    println!("Hello, world!");
+    another_function(); // <-- This is how to call a function.
+}
+
+fn another_function() {
+    println!("Another function.");
+}
+```
+
+The output should be  
+
+```
+Hello, world!
+Another function.
+```
+
+In Rust, the functions can be wrote above or below the main function.
+Rust doesn't care about the placement of functions.  
 
 ## Arguments VS Parameters
 
+We can define functions to accept `parameters`. We provide the variable
+name and its type, similar to a variable declaration. If we have
+multiple parameters, seperate them with commas.
+
+```rs
+fn main() {
+    another_function(5, 12);
+}
+
+fn another_function(x: i32, y: i32) {
+    println!("The value of x is: {}", x);
+    println!("The value of y is: {}", y);
+}
+```
+
+The output should be  
+
+```
+The value of x is: 5
+The value of y is: 12
+```
+
+When we pass values into the function parameters, we call them
+`arguments`, something like "We pass arguments into the function."  
+
 ## Return Value
+
+Some functions can also have return values, these are useful when you
+want to return a value into a variable or use in control flow
+statements.  
+
+We simply draw an arrow (->) and a type you want to return after the
+function.  
+
+For example:  
+
+```rs
+fn five() -> i32 {
+    5
+}
+
+fn main() {
+    let x = five();
+    println!("The value of x is: {}", x);
+}
+```
+
+The output should be  
+
+```
+The value of x is: 5
+```
+
+In Rust, you don't have to specify return with the word `return`, you
+can simply type in a value without semicolon.
+
+Another example:
+
+```rs
+fn main() {
+    let x = plus_one(5);
+    println!("The value of x is: {}", x);
+}
+
+fn plus_one(x: i32) -> i32 {
+    x + 1
+}
+```
+
+The output should be  
+
+```
+The value of x is: 6
+```
+
+The function above accepts an argumet and returns itself plus 1.
 
 ## Recursive Function
 
-# Sequence Data Types
+Functions can also be called recursively, these are called
+`Recursive Functions`  
 
-## Array
+For example:
 
-## Vector
+```rs
+fn factorial(x: i32) -> i32 {
+    if x == 0 {
+        1
+    }
+
+    x * factorial(x-1)
+}
+
+fn main() {
+    let x: i32 = factorial(5);
+
+    println!("The value of x is: {}", x);
+}
+```
+
+The output should be  
+
+```
+The value of x is: 120
+```
+
+The above function computes factorial with a recursive method,
+basically it keeps returning the arguments passed in times the
+function with the argument decrement by 1 until the argument is 0, it
+will only return 1, stops the recursion, multiply the result and
+return it in the end.  
+
+Unless the argument is 0 at first, the programming will simply return
+1 and the output should be  
+
+```
+The value of x is: 1
+```
+
+# Complex Data Types
+
+## Sequence Data Types
+
+### Array
+
+### Vector
 
 ## &str VS String
 
 ## Tuple
 
-## Struct (Basic)
+## Struct
 
 ## Enum
 
