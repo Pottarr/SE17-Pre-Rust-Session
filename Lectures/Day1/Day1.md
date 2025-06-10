@@ -1,41 +1,41 @@
 # Topics
-- Installing Rust
-  - Windows
-  - MacOS and Linux
-- Rust Compiler and Cargo
-  - rustc (Rust compiler)
-  - cargo (Rust packages manager)
-  - rustc VS cargo
-- Basic Syntax
-  - print! and println!
-  - Commenting Code
-- Variables and Data Types
-  - let Keyword
-  - mut Keyword
-  - Shadowing
-  - Scalar Data Types
-    - Integers
-    - Floating-point Numbers
-    - Boolean
-    - Character
-- Operators
-  - Operator Types (By number of operands)
-    - Unary Operators
-    - Binary Operators
-  - Operator Types (By their use cases)
-    - Arithmetic Operators
-    - Comparison Operators
-    - Logical Operators
-    - Compound Assignment Operators
-    - Parentheses
-- Control Flow Keywords
-  - if-else statements
-  - Nested if statements
-  - match statements
-- Loops
-  - Normal Loop
-  - For Loop
-  - While Loop
+    - Installing Rust
+    - Windows
+    - MacOS and Linux
+    - Rust Compiler and Cargo
+    - rustc (Rust compiler)
+    - cargo (Rust packages manager)
+    - rustc VS cargo
+    - Basic Syntax
+    - print! and println!
+    - Commenting Code
+    - Variables and Data Types
+    - let Keyword
+    - mut Keyword
+    - Shadowing
+    - Scalar Data Types
+        - Integers
+        - Floating-point Numbers
+        - Boolean
+        - Character
+    - Operators
+    - Operator Types (By number of operands)
+        - Unary Operators
+        - Binary Operators
+    - Operator Types (By their use cases)
+        - Arithmetic Operators
+        - Comparison Operators
+        - Logical Operators
+        - Compound Assignment Operators
+        - Parentheses
+    - Control Flow Keywords
+    - if-else statements
+    - Nested if statements
+    - match statements
+    - Loops
+    - Normal Loop
+    - For Loop
+    - While Loop
 
 
 
@@ -341,7 +341,7 @@ singed and unsigned.
 | ------ | ------ | -------- |
 | 8-bit | i8 | u8 |
 | 16-bit | i16 | u16 |
-| 32-bit | i8 | u32 |
+| 32-bit | i32 | u32 |
 | 64-bit | i64 | u64 |
 | 128-bit | i128 | u128 |
 

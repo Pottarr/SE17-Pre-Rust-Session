@@ -2,7 +2,7 @@
 - Basic Ownership
     - Rules of Ownership
     - Reference
-    -Mutable Reference VS Immutable Reference
+    - Mutable Reference VS Immutable Reference
     - Dangling Reference
 - Function
     - Arguments VS Parameters
@@ -18,7 +18,7 @@
                 - Iteration by Element
                 - Iteration by Index
         - Vector
-    - &str VS String
+    - &str and String
     - Tuple
     - Struct
     - Enum
@@ -510,10 +510,30 @@ The value of x is: 1
 
 # Complex Data Types
 
+In Rust, the word `Complex Data Types` is mot officially defined but it
+is used in this session to simply group these 3 types of data groups.
+
+- Compound Types
+    - Array
+    - Tuple
+    - Slice
+- Custom Types
+    - Struct
+    - Enum
+    - Constant
+- Standard Library Types
+    - String
+    - Vector
+    - Option
+    - Result
+
+> [!NOTE]
+> We won't include `Slice` and `Constant` in this 2 days session.
+
 ## Sequence Data Types
 
 In this topic, we'll talk about some more Data Types, mainly
-Sequencing Data Types.  
+Sequence Data Types.  
 
 ### Array
 
@@ -797,17 +817,89 @@ for element in &vec {
 ```
 
 The output should be  
+
 ```
 1
 2
 3
 ```
 
-## &str VS String
+## &str and String
 
 ## Tuple
 
+A tuple is a general way of grouping together a number of values with
+a variety of types into one compound type. Tuples have a fixed length.
+Therefore, once declared, they cannot grow or shrink in size.
+
+### Declaration
+
+We create a tuple by writing a comma-separated list of values inside
+parentheses. Each position in the tuple has a type, and the types of
+the different values in the tuple don’t have to be the same.  
+We can add optional type annotations to tuple variable.  
+
+For example:  
+
+```rs
+let tup: (i32, String, u8, bool) = (67011352, String::from("Theepakorn Phayonrat"), 20, true);
+// Assume this is my student information stores in tuple. (id, name, age, is_se_std)
+```
+
+We can  use pattern matching to destruct a tuple.  
+
+For example:  
+
+```rs
+let coordinate: (i32, i32, i32) = (11, 45, -109);
+
+let (x, y, z) = coordinate;
+println!("My coordinate is X: {x}, Y: {y}, Z: {z}!");
+```
+
+The output should be  
+
+```
+My coordinate is X: 11, Y: 45, Z: -109!
+```
+
+We can also access a tuple element directly by using a period (`.`)
+followed by the index of the value we want to access.
+
+For example:
+
+```rs
+let lecturer: (String, u8, f32) = (String::from("Phairoj Jatanachai"), 58, 65000);
+
+let name = lecturer.0;
+let age = lecturer.1;
+let salary = lecturer.2;
+
+println!("<== Lecturer Information ==>");
+println!("Name: {name}");
+println!("Age: {age}");
+println!("Salary: {salary}");
+```
+
+The output should be  
+
+```
+<== Lecturer Information ==>
+Name: Phairoj Jatanachai
+Age: 58
+Salary: 65000
+```
+
 ## Struct
+
+A `struct`, or structure, is a custom data type that lets you package
+together and name multiple related values that make up a meaningful
+group. If you’re familiar with an object-oriented language, a struct
+is like an object’s data attributes. In this section, we’ll compare
+and contrast tuples with structs to build on what you already know and
+demonstrate when structs are a better way to group data.  
+
+
 
 ## Enum
 
