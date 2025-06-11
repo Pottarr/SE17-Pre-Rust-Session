@@ -1,42 +1,42 @@
 # Topics
 
 - Installing Rust
-- Windows
-- MacOS and Linux
+    - Windows
+    - MacOS and Linux
 - Rust Compiler and Cargo
-- rustc (Rust compiler)
-- cargo (Rust packages manager)
-- rustc VS cargo
+    - rustc (Rust compiler)
+    - cargo (Rust packages manager)
+    - rustc VS cargo
 - Basic Syntax
-- print! and println!
-- Commenting Code
+    - print! and println!
+    - Commenting Code
 - Variables and Data Types
-- let Keyword
-- mut Keyword
-- Shadowing
+    - let Keyword
+    - mut Keyword
+    - Shadowing
 - Scalar Data Types
     - Integers
     - Floating-point Numbers
     - Boolean
     - Character
 - Operators
-- Operator Types (By number of operands)
-    - Unary Operators
-    - Binary Operators
-- Operator Types (By their use cases)
-    - Arithmetic Operators
-    - Comparison Operators
-    - Logical Operators
-    - Compound Assignment Operators
-    - Parentheses
+    - Operator Types (By number of operands)
+        - Unary Operators
+        - Binary Operators
+    - Operator Types (By their use cases)
+        - Arithmetic Operators
+        - Comparison Operators
+        - Logical Operators
+        - Compound Assignment Operators
+        - Parentheses
 - Control Flow Keywords
-- if-else statements
-- Nested if statements
-- match statements
+    - if-else statements
+    - Nested if statements
+    - match statements
 - Loops
-- Normal Loop
-- For Loop
-- While Loop
+    - Normal Loop
+    - For Loop
+    - While Loop
 
 
 
