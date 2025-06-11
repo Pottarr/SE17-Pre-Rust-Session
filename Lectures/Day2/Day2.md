@@ -18,8 +18,18 @@
                 - Iteration by Element
                 - Iteration by Index
         - Vector
-    - &str and String
+            - Declaration
+            - Accessing
+            - Multidimensional Vector
+            - Vector Iteration
+                - Iteration by Element
+                - Iteration by Index
     - Tuple
+        - Declaration
+        - Accessing Element
+    - Slice
+        - Declaration
+    - &str and String
     - Struct
     - Enum
         - Declaration
@@ -709,6 +719,8 @@ initialize the vector with some items with `vec!` but not with
 `Vec::new()` will only create an empty vector, then you
 can push in items later.
 
+#### Vector Methods
+
 To push in new elements, we use the `.push()` method. **Don't forget
 to make the variable mutable.**  
 
@@ -788,6 +800,8 @@ The output should be
 The length of this vector is 5
 ```
 
+#### Multidimensional Vector
+
 We can also do `Multidimensional Vectors` same as arrays.
 
 ```rs
@@ -805,6 +819,7 @@ The output should be
 1
 ```
 
+#### Vector Iteration
 
 To iterate through each elements, we can use loops.
 
@@ -823,8 +838,6 @@ The output should be
 2
 3
 ```
-
-## &str and String
 
 ## Tuple
 
@@ -863,6 +876,8 @@ The output should be
 My coordinate is X: 11, Y: 45, Z: -109!
 ```
 
+### Accessing Element
+
 We can also access a tuple element directly by using a period (`.`)
 followed by the index of the value we want to access.
 
@@ -890,6 +905,47 @@ Age: 58
 Salary: 65000
 ```
 
+## Slice
+
+In Rust, `Slices` are references to a portion of an array ot other
+collection. Dynamically sized effience for working with subsets of
+data.  
+A `slice` is a kind of reference, so it does not have ownership.  
+
+### Declaration
+
+As mentioned earlier, `slices` are references of collection. We cannot
+create one without referencing from other collection.  
+Therefore, this how we normally create a `slice` variable.  
+
+For example:  
+
+```rs
+let arr [i32; 5] = [1, 2, 3, 4, 5];
+let slice = %arr[1..3] // From this line we're creating a slice of i32 from the 2nd to the 3rd element
+                       // because of the same convention as indexing of array, excluding the end boundary.
+println!("Here is your slice: {:?}", slice);
+```
+
+The output should be  
+
+```
+Here is your slice: [2, 3]
+```
+
+> [!NOTE]
+> We will talk more aobut `slice` later on after the midterm. For now,
+> we are using slice in for loop.  
+
+> [!TIP]
+> The `:?` inside the curly braces inside the `println!()` macro is the
+> `Debug Format Specifier`. It is used to quickly print out those
+> data from the Complex Data Types (that means we can use on all of
+> them **IF THEY HAVE `#[derive(Debug)]` OR HAVE `Debug` TRAIT**). We will
+> find out more in the real lecture.  
+
+## &str and String
+
 ## Struct
 
 A `struct`, or structure, is a custom data type that lets you package
@@ -898,8 +954,6 @@ group. If you’re familiar with an object-oriented language, a struct
 is like an object’s data attributes. In this section, we’ll compare
 and contrast tuples with structs to build on what you already know and
 demonstrate when structs are a better way to group data.  
-
-
 
 ## Enum
 
