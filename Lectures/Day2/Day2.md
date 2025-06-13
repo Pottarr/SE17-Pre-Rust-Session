@@ -31,8 +31,12 @@
         - Declaration
     - &str and String
     - Struct
+        - Defining and Instantiating
+        - Accessing Attribute
+        - Debugging Struct
+        - Struct-Returning Function
     - Enum
-        - Declaration
+        - Defining and Instantiating
         - Standard Library Enum
             - Option
             - Result
@@ -944,19 +948,247 @@ Here is your slice: [2, 3]
 > them **IF THEY HAVE `#[derive(Debug)]` OR HAVE `Debug` TRAIT**). We will
 > find out more in the real lecture.  
 
-## &str and String
+## String and &str
+
+
 
 ## Struct
 
 A `struct`, or structure, is a custom data type that lets you package
 together and name multiple related values that make up a meaningful
-group. If you’re familiar with an object-oriented language, a struct
+group. If you’re familiar with an object-oriented language, a `struct`
 is like an object’s data attributes. In this section, we’ll compare
-and contrast tuples with structs to build on what you already know and
-demonstrate when structs are a better way to group data.  
+and contrast `tuples` with `structs` to build on what you already know
+and demonstrate when `structs` are a better way to group data.  
+
+`Structs` are similar to tuples, discussed in `Tuple` section, in that
+both hold multiple related values. Like tuples, the pieces of a struct
+can be different types. Unlike with `tuples`, in a `struct` you’ll
+name each piece of data so it’s clear what the values mean.  
+Adding these names means that structs are more flexible than tuples:
+you don’t have to rely on the order of the data to specify or access
+the values of an instance.  
+
+### Defining and Instantiating
+
+To define a `struct`, we enter the keyword `struct` and name the
+entire `struct`. A struct’s name should describe the significance of
+the pieces of data being grouped together.  
+Then, inside curly brackets, we define the names and types of the
+pieces of data, which we call fields.
+
+For example:  
+
+```rs
+struct Player {
+    name: String,
+    id: u32,
+    level: u8,
+    is_in_quest: bool,
+}
+```
+
+To use a `struct` after we’ve defined it, we create an instance of
+that `struct` by specifying `concrete values` for each of the fields.  
+We create an instance by stating the name of the `struct` and then add
+curly brackets containing `key: value` pairs, where the `keys` are
+the `names` of the fields and the `values` are the `data` we want to
+store in those fields.  
+We don’t have to specify the fields in the same
+order in which we declared them in the `struct`. In other words,
+the `struct` definition is like a general template for the type, and
+instances fill in that template with particular data to create values
+of the type.  
+
+For example:  
+
+```rs
+let p1 = Player {
+    name: String::from("Pottarr"),
+    id: 67011352,
+    level: 100,
+    is_in_quest: true,
+};
+
+### Accessing Attribute
+```
+
+To get a specific value from a `struct`, we use dot notation.  
+For example, to access this player’s name, we use `p1.name`.  
+If the instance is mutable, we can change a value by using the dot
+notation and assigning into a particular field.  
+
+For example:  
+
+```rs
+struct Player {
+    name: String,
+    id: u32,
+    level: u8,
+    is_in_quest: bool,
+}
+
+let mut p1 = Player {
+    name: String::from("Pottarr"),
+    id: 67011352,
+    level: 100,
+    is_in_quest: true,
+};
+
+p1.name = String::from("KrakenLord");
+p1.id = 67011090;
+```
+
+From now, the p1's name attribute is now `String::from("KrakenLord")`
+and also applies to the p1's `id` attribute which is now `67011090`.
+
+Note that the entire instance must be mutable; Rust doesn’t allow us
+to mark only certain fields as mutable.  
+
+For example:  
+
+```rs
+struct Player {
+    mut name: String,
+    id: u32,
+}
+
+fn main() {
+    let mut p1 = Player {
+        name: String::from("Pottarr"),
+        id: 67011352,
+    };
+    p1.name = String::from("KrakenLord");
+}
+```
+
+The output should be  
+
+```
+   Compiling playground v0.0.1 (/playground)
+error: expected identifier, found keyword `mut`
+ --> src/main.rs:2:5
+  |
+1 | struct Player {
+  |        ------ while parsing this struct
+2 |     mut name: String,
+  |     ^^^ expected identifier, found keyword
+
+error: could not compile `playground` (bin "playground") due to 1 previous error
+```
+
+From this pile of code, Rust expected an `identifier`, not a `keyword`
+from your struct definition.  
+Siply `let mut` the `p1` instance is enough to make the attributes
+mutable. We don't need to use `mut` inside the `struct` definition.
+
+### Debugging Struct
+
+As we were told earlier that when we use `#[derive(Debug)]` on any
+struct written by yourselves (AKA non-std library defined struct), it
+doesn't automatically have `Debug` trait implemented.  
+So if you want to debug print the `struct`, make sure to add
+`#[derive(Debug)]` above the struct definition.  
+
+For example:  
+
+```rs
+struct Player {
+    name: String,
+    id: u32,
+    level: u8,
+    is_in_quest: bool,
+}
+
+let mut p1 = Player {
+    name: String::from("Pottarr"),
+    id: 67011352,
+    level: 100,
+    is_in_quest: true,
+};
+
+println!("{:?}", p1);
+
+p1.name = String::from("KrakenLord");
+p1.id = 67011090;
+
+println!("{:?}", p1);
+```
+
+The output should be  
+
+```
+Player { name: "Pottarr", id: 67011352 }
+Player { name: "KrakenLord", id: 67011090 }
+```
+
+### Struct-Returning Function
+
+As with any expression, we can
+construct a new instance of the struct as the last expression in the
+function body to implicitly return that new instance.
+
+For example:  
+
+```rs
+fn create_player(name: String, id:32) -> Player {
+    Player {
+        name: name,
+        id: id,
+        level: 1,
+        is_in_quest: false,
+    }
+}
+```
+
+This function will take arguments and return a new `Player` instance.
+
+> [!TIP]
+> As you can see, the parameter names and struct attribute identifiers
+> can have the same name.
+
+Also, there is another way you can shorthand this function by this
+example below:  
+
+```rs
+fn create_player(name: String, id:32) -> Player {
+    Player {
+        name,
+        id,
+        level: 1,
+        is_in_quest: false,
+    }
+}
+```
+
+Since the parameters name is the same as the struct attribute
+identifiers, we can write `name` rather than `name: name`.
+
+> [!NOTE]
+> We will talk more about `struct` in te real lectures where the
+> professor will teach you about the Struct implementation or `impl`
 
 ## Enum
 
-### Option Enum
+In this chapter, we’ll look at `enumerations`, also referred to as
+`enums`. Enums allow you to define a type by enumerating its possible
+variants. First we’ll define and use an enum to show how an enum can
+encode meaning along with data.  
 
-### Result Enum
+### Defining and Instantiating
+
+
+
+
+
+### Standard Library Enum
+
+#### Option Enum
+
+#### Result Enum
+
+
+---
+Lecturers:  
+[Pottarr](https://github.com/Pottarr) (P'Potter)  
+[Krakenlord5](https://github.com/Krakenlord5) (P'Tang)
