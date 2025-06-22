@@ -1,13 +1,10 @@
 # Topics
+
 - Basic Ownership
     - Rules of Ownership
     - Reference
     - Mutable Reference VS Immutable Reference
     - Dangling Reference
-- Function
-    - Arguments VS Parameters
-    - Return Value
-    - Recursive Function
 - Complex Data Types
     - Sequence Data Types
         - Array
@@ -369,162 +366,9 @@ fn no_dangle() -> String {
 }
 ```
 
-# Function
-
-In this section, we will be talking functions!  
-Functions are an important part in programming as it makes your code 
-more reuseable and have a cleaner look.  
-
-In Rust, you write the main codes in the `main()` function.
-
-For example, this below code writes a new function called
-`another_function()` and the `main()` function calls that function.
-
-```rs
-fn main() {
-    println!("Hello, world!");
-    another_function(); // <-- This is how to call a function.
-}
-
-fn another_function() {
-    println!("Another function.");
-}
-```
-
-The output should be  
-
-```
-Hello, world!
-Another function.
-```
-
-In Rust, the functions can be wrote above or below the main function.
-Rust doesn't care about the placement of functions.  
-
-## Arguments VS Parameters
-
-We can define functions to accept `parameters`. We provide the variable
-name and its type, similar to a variable declaration. If we have
-multiple parameters, seperate them with commas.
-
-```rs
-fn main() {
-    another_function(5, 12);
-}
-
-fn another_function(x: i32, y: i32) {
-    println!("The value of x is: {}", x);
-    println!("The value of y is: {}", y);
-}
-```
-
-The output should be  
-
-```
-The value of x is: 5
-The value of y is: 12
-```
-
-When we pass values into the function parameters, we call them
-`arguments`, something like "We pass arguments into the function."  
-
-## Return Value
-
-Some functions can also have return values, these are useful when you
-want to return a value into a variable or use in control flow
-statements.  
-
-We simply draw an arrow (->) and a type you want to return after the
-function.  
-
-For example:  
-
-```rs
-fn five() -> i32 {
-    5
-}
-
-fn main() {
-    let x = five();
-    println!("The value of x is: {}", x);
-}
-```
-
-The output should be  
-
-```
-The value of x is: 5
-```
-
-In Rust, you don't have to specify return with the word `return`, you
-can simply type in a value without semicolon.
-
-Another example:
-
-```rs
-fn main() {
-    let x = plus_one(5);
-    println!("The value of x is: {}", x);
-}
-
-fn plus_one(x: i32) -> i32 {
-    x + 1
-}
-```
-
-The output should be  
-
-```
-The value of x is: 6
-```
-
-The function above accepts an argumet and returns itself plus 1.
-
-## Recursive Function
-
-Functions can also be called recursively, these are called
-`Recursive Functions`  
-
-For example:
-
-```rs
-fn factorial(x: i32) -> i32 {
-    if x == 0 {
-        1
-    }
-
-    x * factorial(x-1)
-}
-
-fn main() {
-    let x: i32 = factorial(5);
-
-    println!("The value of x is: {}", x);
-}
-```
-
-The output should be  
-
-```
-The value of x is: 120
-```
-
-The above function computes factorial with a recursive method,
-basically it keeps returning the arguments passed in times the
-function with the argument decrement by 1 until the argument is 0, it
-will only return 1, stops the recursion, multiply the result and
-return it in the end.  
-
-Unless the argument is 0 at first, the programming will simply return
-1 and the output should be  
-
-```
-The value of x is: 1
-```
-
 # Complex Data Types
 
-In Rust, the word `Complex Data Types` is mot officially defined but it
+In Rust, the word `Complex Data Types` is not officially defined but it
 is used in this session to simply group these 3 types of data groups.
 
 - Compound Types
@@ -950,7 +794,69 @@ Here is your slice: [2, 3]
 
 ## String and &str
 
+In Rust, there 
 
+### String
+
+#### Declaration
+
+In Rust, we can declare `String` with these 2 `String constructor methods`.  
+
+```rs
+let empty_string: String = String::new(); // To create empty String
+let some_string: String = String::from("Some String"); // To create non-empty String
+```
+
+### Accessing Character
+
+To access each character in String, we cannot simply use index
+directly like array or vector.  
+
+### String Methods
+
+There are also some `String Methods` you should know too.  
+
+For example:  
+
+```rs
+let empty_string: String = String::new(); // To create empty String
+
+if empty_string.is_empty() { // To check whether the String is empty or not
+    println!("The String is empty!");
+} else {
+    println!("The String is NOT empty!");
+}
+```
+
+The output should be  
+
+```
+The String is empty!
+```
+
+### &str
+
+### String VS &str
+
+### format!() Macro
+
+In Rust, there is a macro to fotmat `Strings`.
+
+For example:  
+
+```rs
+let hello: String = String::from("Hello");
+let world: String = String::from("World");
+let hello_world: String = format!("{}, {}!", hello, world);
+
+println!("{hello_world}");
+```
+
+The output should be  
+
+```
+Hello, World!
+```
 
 ## Struct
 
@@ -987,6 +893,11 @@ struct Player {
     is_in_quest: bool,
 }
 ```
+
+> [!IMPORTANT]
+> The naming convention of `Struct names`, `Enum names`, `Trait names`
+> and `Type aliases` are `Pascal Case`, which can be written like
+> this: `PascalCase`  
 
 To use a `struct` after we’ve defined it, we create an instance of
 that `struct` by specifying `concrete values` for each of the fields.  
@@ -1177,18 +1088,202 @@ encode meaning along with data.
 
 ### Defining and Instantiating
 
+In this case we're using traffic light as our visualization. Imagine
+we want to present a traffic light than can either be **Red**,
+**Yellow**, or **Green**.  
 
+We can write it as a Rust Enum like this:  
 
+```rs
+enum TrafficLight {
+    Red,
+    Yellow,
+    Green,
+}
+```
+
+Now, with this `TrafficLight` enum, we can write a function that tell
+us what to do when encountering these color lights.  
+
+For example:  
+
+```rs
+fn traffic_instruction(light: TrafficLight) {
+    match light {
+        TrafficLight::Red => println!("Stop!"),
+        TrafficLight::Yellow => println!("Slow Down!"),
+        TrafficLight::Green => println!("Go!"),
+    }
+}
+```
+
+As we combine all codes we'll get a simple traffic light program:  
+
+```rs
+enum TrafficLight {
+    Red,
+    Yellow,
+    Green,
+}
+
+fn main() {
+    traffic_instruction(TrafficLight::Green);
+}
+
+fn traffic_instruction(light: TrafficLight) {
+    match light {
+        TrafficLight::Red => println!("Stop!"),
+        TrafficLight::Yellow => println!("Slow Down!"),
+        TrafficLight::Green => println!("Go!"),
+    }
+}
+```
+
+The output should be  
+
+```
+Go!
+```
 
 
 ### Standard Library Enum
 
-#### Option Enum
+`Standard Library Enums` are enum types that are defined and provided
+by Rust's Standard Library (`std`). From this you can use it without
+writing it yourselves or importing external crates.  
+They are parts of built-in tools that come with Rust.  
 
-#### Result Enum
+#### Benefits
 
+By the common nature of Rust, it does not have `null` or `execeptions`.
+Rust wants to make `absences of a value` and `error handling`
+**explicit** and **safe**. Therefore, you must handle them properly.
+This is why STD Lib Enums come to be a part of your programs.  
+
+#### Option
+
+`Option<T>` is used when a value **might or might not exist**.  
+
+Here is how Option Enum is defined:  
+
+```rs
+enum Option<T> {
+    Some<T>,
+    None,
+}
+```
+
+We can demonstrate the Option Enum by this simple function.
+
+For example:  
+
+```rs
+fn main() {
+    match someone(1) {
+        Some(x) => println!("Some: {x}"),
+        None => println!("None"),
+    }
+    match someone(2) {
+        Some(x) => println!("Some: {x}"),
+        None => println!("None"),
+    }
+}
+
+fn someone(one: i32) -> Option<i32> {
+    // Will return Some(1) when received 1 and return None in other cases.
+    if one == 1 {
+        Some(1)
+    } else {
+        None
+    }
+}
+```
+
+The output should be  
+
+```
+Some: 1
+None
+```
+
+From Vector, we've learnt that the method `.get()` returns `Option<T>`.  
+
+We can use it like this:  
+
+```rs
+fn main() {
+    let db = vec!(("SnackJek", 15.00), ("TofuBoy", 20.00), ("Isded", 15.00));
+    check_existence(&db, 5);
+    check_existence(&db, 1);
+}
+
+fn check_existence(vec:&Vec<(&str, f64)>, target: usize) {
+    match vec.get(target) {
+        Some((name, price)) => println!("Found product name: {} with price = {:.2}THB in INDEX = {}", name, price, target),
+        None => println!("No product with INDEX = {} exists!", target),
+    }
+}
+```
+
+The output should be  
+
+```
+No product with INDEX = 5 exists!
+Found product name: TofuBoy with price = 20.00THB in INDEX = 1
+```
+
+#### Result
+
+Result<T, E> is used when an operation can succedd ro fail.
+
+This is how Result Enum is defined:  
+
+```rs
+enum Result<T, E> {
+    Ok<T>,
+    Err<E>,
+}
+```
+
+We all know that we cannot divided by zero. Therefore we can prevent
+runtime error by using `Result Enum`.  
+
+We can use it like this:  
+
+```rs
+fn divide(a: f64, b: f64) -> Result<f64, String> {
+    if b == 0.0 {
+        Err(String::from("Division by zero"))
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn main() {
+    match divide(10.0, 2.0) {
+        Ok(result) => println!("Result: {}", result),
+        Err(e) => println!("Error: {}", e),
+    }
+    match divide(3.0, 0.0) {
+        Ok(result) => println!("Result: {}", result),
+        Err(e) => println!("Error: {}", e),
+    }
+}
+```
+
+The output should be  
+
+```
+Result: 5
+Error: Division by zero
+```
 
 ---
+
+Back to [Main Page](../../README.md)
+
+---
+
 Lecturers:  
 [Pottarr](https://github.com/Pottarr) (P'Potter)  
 [Krakenlord5](https://github.com/Krakenlord5) (P'Tang)

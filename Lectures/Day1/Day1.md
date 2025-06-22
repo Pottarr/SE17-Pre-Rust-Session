@@ -37,6 +37,10 @@
     - Normal Loop
     - For Loop
     - While Loop
+- Function
+    - Arguments VS Parameters
+    - Return Value
+    - Recursive Function
 
 
 
@@ -329,6 +333,10 @@ let x = "Pizza"; // <--- x is: Pizza
 let x = x.len(); // <--- x is: 5
 ```
 
+
+
+
+
 ## Scalar Data Types
 
 In today session, we are only going to talk about `Scalar Data Types`.
@@ -392,6 +400,10 @@ only be 1 character long.
 ```rs
 let meow: char = 'A';
 ```
+
+
+
+
 
 # Operators
 
@@ -951,6 +963,163 @@ The output should be
 ***
 **
 *
+```
+
+
+
+
+
+# Function
+
+In this section, we will be talking functions!  
+Functions are an important part in programming as it makes your code 
+more reuseable and have a cleaner look.  
+
+In Rust, you write the main codes in the `main()` function.
+
+For example, this below code writes a new function called
+`another_function()` and the `main()` function calls that function.
+
+```rs
+fn main() {
+    println!("Hello, world!");
+    another_function(); // <-- This is how to call a function.
+}
+
+fn another_function() {
+    println!("Another function.");
+}
+```
+
+The output should be  
+
+```
+Hello, world!
+Another function.
+```
+
+In Rust, the functions can be wrote above or below the main function.
+Rust doesn't care about the placement of functions.  
+
+## Arguments VS Parameters
+
+We can define functions to accept `parameters`. We provide the variable
+name and its type, similar to a variable declaration. If we have
+multiple parameters, seperate them with commas.
+
+```rs
+fn main() {
+    another_function(5, 12);
+}
+
+fn another_function(x: i32, y: i32) {
+    println!("The value of x is: {}", x);
+    println!("The value of y is: {}", y);
+}
+```
+
+The output should be  
+
+```
+The value of x is: 5
+The value of y is: 12
+```
+
+When we pass values into the function parameters, we call them
+`arguments`, something like "We pass arguments into the function."  
+
+## Return Value
+
+Some functions can also have return values, these are useful when you
+want to return a value into a variable or use in control flow
+statements.  
+
+We simply draw an arrow (->) and a type you want to return after the
+function.  
+
+For example:  
+
+```rs
+fn five() -> i32 {
+    5
+}
+
+fn main() {
+    let x = five();
+    println!("The value of x is: {}", x);
+}
+```
+
+The output should be  
+
+```
+The value of x is: 5
+```
+
+In Rust, you don't have to specify return with the word `return`, you
+can simply type in a value without semicolon.
+
+Another example:
+
+```rs
+fn main() {
+    let x = plus_one(5);
+    println!("The value of x is: {}", x);
+}
+
+fn plus_one(x: i32) -> i32 {
+    x + 1
+}
+```
+
+The output should be  
+
+```
+The value of x is: 6
+```
+
+The function above accepts an argumet and returns itself plus 1.
+
+## Recursive Function
+
+Functions can also be called recursively, these are called
+`Recursive Functions`  
+
+For example:
+
+```rs
+fn factorial(x: i32) -> i32 {
+    if x == 0 {
+        1
+    }
+
+    x * factorial(x-1)
+}
+
+fn main() {
+    let x: i32 = factorial(5);
+
+    println!("The value of x is: {}", x);
+}
+```
+
+The output should be  
+
+```
+The value of x is: 120
+```
+
+The above function computes factorial with a recursive method,
+basically it keeps returning the arguments passed in times the
+function with the argument decrement by 1 until the argument is 0, it
+will only return 1, stops the recursion, multiply the result and
+return it in the end.  
+
+Unless the argument is 0 at first, the programming will simply return
+1 and the output should be  
+
+```
+The value of x is: 1
 ```
 
 ---
