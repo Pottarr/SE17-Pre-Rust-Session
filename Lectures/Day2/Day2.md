@@ -32,7 +32,8 @@
             - Accessing Character
             - String Methods
         - &str
-            - 
+            - Declaration
+            - Accessing Character
         - String VS &str
         - Format!() Macro
     - Struct
