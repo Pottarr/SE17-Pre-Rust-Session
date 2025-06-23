@@ -10,6 +10,7 @@
 - Basic Syntax
     - print! and println!
     - Commenting Code
+    - Rust Attributes
 - Variables and Data Types
     - let Keyword
     - mut Keyword
@@ -200,7 +201,7 @@ It can above, under, or in the middle of other functions
 
 ## Commenting Code
 
-In rust we use double forward slashes `//` to comment code.
+In Rust we use double forward slashes `//` to comment code.
 
 For example,  
 
@@ -215,6 +216,61 @@ The output should be
 
 ```
 Hello, World!
+```
+
+## Rust Attributes
+
+In Rust, `attributes` are used to provide metadata about various
+elements in the code, such as functions, structs, modules, and even
+variables.  
+
+Attributes can control compiler behavior, specify linting rules, and
+enable or disable specific features. They are denoted by a `#`
+followed by square brackets, for example, `#[attribute]`.
+
+For example:  
+
+```rs
+fn main() {
+    #[allow(unused_variables)]
+    let x = 3; // This will not cause any warnings or errors even though 'x' is not used.
+    #[warn(unused_variables)]
+    let y = 2; // This will cause a compile time warning because 'y' is not used.
+    #[deny(unused_variables)]
+    let z = 1; // This will casue a compile time error because `z` is not used.
+}
+```
+
+The output should be  
+
+```
+   Compiling playground v0.0.1 (/playground)
+warning: unused variable: `y`
+ --> src/main.rs:5:5
+  |
+5 | let y = 2; // This will cause a compile time warning because 'y' is not used.
+  |     ^ help: if this is intentional, prefix it with an underscore: `_y`
+  |
+note: the lint level is defined here
+ --> src/main.rs:4:8
+  |
+4 | #[warn(unused_variables)]
+  |        ^^^^^^^^^^^^^^^^
+
+error: unused variable: `z`
+ --> src/main.rs:7:5
+  |
+7 | let z = 1; // This will casue a compile time error because `z` is not used.
+  |     ^ help: if this is intentional, prefix it with an underscore: `_z`
+  |
+note: the lint level is defined here
+ --> src/main.rs:6:8
+  |
+6 | #[deny(unused_variables)]
+  |        ^^^^^^^^^^^^^^^^
+
+warning: `playground` (bin "playground") generated 1 warning
+error: could not compile `playground` (bin "playground") due to 1 previous error; 1 warning emitted
 ```
 
 
@@ -1127,6 +1183,10 @@ The value of x is: 1
 And that is all for today Rust Lecture! We hope to see you again
 tomorrow (25/06/2025). There will be a lab session in the afternoon.
 Feel free to ask question with TAs as you wish.
+
+---
+
+Back to [Main Page](../../README.md)
 
 ---
 Lecturers:  

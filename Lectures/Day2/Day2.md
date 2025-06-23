@@ -26,7 +26,15 @@
         - Accessing Element
     - Slice
         - Declaration
-    - &str and String
+    - String and &str
+        - String
+            - Declaration
+            - Accessing Character
+            - String Methods
+        - &str
+            - 
+        - String VS &str
+        - Format!() Macro
     - Struct
         - Defining and Instantiating
         - Accessing Attribute
@@ -770,7 +778,7 @@ For example:
 
 ```rs
 let arr [i32; 5] = [1, 2, 3, 4, 5];
-let slice = %arr[1..3] // From this line we're creating a slice of i32 from the 2nd to the 3rd element
+let slice = &arr[1..3] // From this line we're creating a slice of i32 from the 2nd to the 3rd element
                        // because of the same convention as indexing of array, excluding the end boundary.
 println!("Here is your slice: {:?}", slice);
 ```
@@ -794,9 +802,12 @@ Here is your slice: [2, 3]
 
 ## String and &str
 
-In Rust, there 
+In Rust, there 2 main types of string. `String` and `&str` (string slice).
 
 ### String
+
+String is a type of string in Rust which is `Heap Allocated`.
+String is mutable with string methods.
 
 #### Declaration
 
@@ -811,6 +822,22 @@ let some_string: String = String::from("Some String"); // To create non-empty St
 
 To access each character in String, we cannot simply use index
 directly like array or vector.  
+For the workaround we use `methods` called `.chars().nth()` and
+`.bytes().nth()` instead.  
+
+For example:  
+
+```rs
+let hello: String = String::from("Hello");
+let e: char = hello.chars().nth(1);
+println!("{e}");
+```
+
+The output should be  
+
+```
+e
+```
 
 ### String Methods
 
@@ -836,7 +863,32 @@ The String is empty!
 
 ### &str
 
+`&Str` (string slice) is a type of string in Rust which is borrowed
+from `String` or from `&'static str` (static string (which we rather
+not mention in this session)). It is immutable (in Safe Rust).
+
+#### Declaration
+
+We can declare `&str` in the same way as in other programming languages.  
+
+For example:  
+
+```rs
+let hello: &str = "Hello";
+```
+
+#### Accessing Character
+
+We use the smae methods (`.chars().nth()` or `.bytes().nth()`) as
+String.
+
 ### String VS &str
+
+| Features | `String` | `&str` |
+| -------- | ------ | ---- |
+| Ownership | Owns the string data | Borrowed Reference |
+| Mutability | Mutable (if declared as `mut`) | Always immutable |
+| Memory Allocatation | Heap | Anywhere (heap, staack, static) |
 
 ### format!() Macro
 
@@ -1277,6 +1329,11 @@ The output should be
 Result: 5
 Error: Division by zero
 ```
+
+---
+
+That's all for this 2 days Pre RUst Session. Thank you for reading.  
+See you all in the lab this afternoon (25/06/2025).
 
 ---
 
