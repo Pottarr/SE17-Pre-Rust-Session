@@ -15,10 +15,10 @@
 - Operators
 - Control Flow Keywords
 - Loops
+- Function
 
 ### Day 2
 - Ownership
-- Function
 - Complex Data Types
 
 ## Lectures
