@@ -888,7 +888,7 @@ String.
 | -------- | ------ | ---- |
 | Ownership | Owns the string data | Borrowed Reference |
 | Mutability | Mutable (if declared as `mut`) | Always immutable |
-| Memory Allocatation | Heap | Anywhere (heap, staack, static) |
+| Memory Allocatation | Heap | Anywhere (heap, stack, static) |
 
 ### format!() Macro
 
