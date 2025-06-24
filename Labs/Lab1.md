@@ -134,7 +134,7 @@ Code:
 ```rs
 fn main() {
     for i in 1..=20 {
-        println!("{i} is a prime number?: {is_prime(i)}");
+        println!("{i} is a prime number?: {}", is_prime(i));
     }
 }
 
