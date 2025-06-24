@@ -57,7 +57,7 @@ Code:
 
 ```rs
 fn main() {
-    let stop = 3;
+    let stop = 12;
 
     // Your code here...
 }
@@ -138,7 +138,7 @@ fn main() {
     }
 }
 
-fn is_prime(i: int) -> bool {
+fn is_prime(i: i32) -> bool {
     // Your code here...
 }
 ```
