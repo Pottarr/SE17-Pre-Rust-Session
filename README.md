@@ -26,7 +26,7 @@
 [Day 2 Lecture](Lectures/Day2/Day2.md)  
 
 ## Labs
-[Day 1 Lab]()  
+[Day 1 Lab](Labs/Lab1.md)  
 [Day 2 Lab]()  
 
 
