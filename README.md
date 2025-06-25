@@ -27,7 +27,7 @@
 
 ## Labs
 [Day 1 Lab](Labs/Lab1.md)  
-[Day 2 Lab]()  
+[Day 2 Lab](Labs/Lab2.md)  
 
 
 ---
