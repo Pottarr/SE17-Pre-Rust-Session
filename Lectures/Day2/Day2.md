@@ -824,25 +824,31 @@ let some_string: String = String::from("Some String"); // To create non-empty St
 To access each character in String, we cannot simply use index
 directly like array or vector.  
 For the workaround we use `methods` called `.chars().nth()` and
-`.bytes().nth()` instead.  
+`.bytes().nth()` instead. It'll return `Option<char>`.
 
 For example:  
 
 ```rs
-let hello: String = String::from("Hello");
-let e: char = hello.chars().nth(1);
+let s: String = String::from("Hello");
+let c: char = s.chars().nth(1);
+match c {
+    Some(c) =< println!("The second char is: {}", c),
+    None => println!("Second char not found")
+}
 println!("{e}");
 ```
 
 The output should be  
 
 ```
-e
+The second char is: e
 ```
 
 ### String Methods
 
 There are also some `String Methods` you should know too.  
+
+We can check whether the String is empty or not with `.is_empty()` method.  
 
 For example:  
 
@@ -860,6 +866,70 @@ The output should be
 
 ```
 The String is empty!
+```
+
+We can insppect the length of the String with `.len()` method.  
+
+For example:  
+
+```rs
+let s = String::from("Good Morning");
+println!("The length of the String ({}) is {}", s, s.len());
+```
+
+The output should be  
+
+```
+The length of the String (Good Morning) is 12
+```
+
+We can append String with string character with `.push()` method.  
+
+For example:  
+
+```rs
+let s = String::from("Yea");
+s.push('h');
+println!("{}", s);
+```
+
+The output should be  
+
+```
+Yeah
+```
+
+We can append String with string literal with `.push_str()` method.
+
+For example:  
+
+```rs
+let s = String::from("yo");
+s.push_str(" bro");
+println!("{}", s);
+```
+
+The output should be  
+
+```
+yo bro
+```
+
+In addition, we can also concatenate Strings with `+` operator too.
+
+For example:  
+
+```rs
+let s1 = String::from(“Hello, “);
+let s2 = “World!”.to_string();
+let s3 = s1 + &s2 // By Ownership s2's ownership has been taken. Therefore, it cannot be used.
+println!(“{}”, s3);
+```
+
+The output should be  
+
+```
+Hello, World!
 ```
 
 ### &str
